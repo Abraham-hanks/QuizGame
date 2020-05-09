@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width= device-width, initial-scale= 1.0">
+        <title>Responsive Quiz Game</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <!-- <link rel="stylesheet" type="text/css" media="screen and (max-width: 480px)" href="style.css" /> -->
+
+    </head>
+    <body>
+        <header>
+            <h1>Football Trivia</h1>
+        </header>
+        <main>
+            <div>
+                <div id="questions">
+                   <div id="question-holder"><h1>Q1. A question requiring an answer?</h1></div> 
+                   <div>
+                       <div class="answer">Answer 1</div>
+                       <div class="answer">Answer 2</div>
+                       <div class="answer">Answer 3</div>
+                   </div>
+                </div>
+                <div id="answer-counter">
+                    <div id="counter">You have answered <span>0</span> out of 5 correctly</div>
+                   <button id="next-button">Next</button>
+                </div>
+                <div id="result">
+                    <div>
+                        <h1>You scored: <span class="correct-count">3</span> out of <span class="total-count">5</span></h1>
+                    </div>
+                    <div>
+                        <h2>Your score percentage is <span id="correct-percentage">70</span>%</h2>
+                    </div>
+                    <div id="next-button" style="display: none;">
+                        <button id="restart-button">Repeat Game</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </main>
+        <footer>
+            <p>copyright &copy; <script>document.write(new Date().getFullYear())</script>, Abraham-Hanks</p>
+        </footer>
+        <script src="script.js"></script>
+    </body>
+</html>
