@@ -1,8 +1,16 @@
 let currentIndex = 0;
 let correctAnswers = 0;
+var correctElement; 
 let answerElement = document.querySelectorAll('.answer');
 let questionHolder = document.getElementById('question-holder');
-let nextButton = document.getElementById('next-button')
+let nextButton = document.getElementById('next-button');
+let restartButton = document.getElementById('restart-button');
+let counter = document.getElementById('counter');
+let correctCount = document.getElementById('correct-count');
+let correctPercentage = document.getElementById('correct-percentage');
+let resultsPage = document.getElementById('result');
+let questionsPage = document.getElementById('questions');
+let answerCounter = document.getElementById('answer-counter');
 
 
 const questions = [
@@ -93,13 +101,33 @@ const questions = [
     },
 ];
 
-
+//Event Listeners
 nextButton.addEventListener('click', nextQuestion);
+restartButton.addEventListener('click', initializeGame);
 for (let index = 0; index < answerElement.length; index++) {
     const element = answerElement[index];
     element.addEventListener('click',  validateAnswer)
 }
 
+//Controllers
+function initializeGame(){
+    currentIndex = 0;
+    correctAnswers = 0;
+    questionsPage.style.display = 'block';
+    answerCounter.style.display = 'block'
+    resultsPage.style.display = 'none';
+    setDefault(currentIndex)
+}
+function setDefault(){
+    for (let index = 0; index < answerElement.length; index++) {
+        const element = answerElement[index];
+        element.classList.remove('correct');
+        element.classList.remove('incorrect');
+        element.classList.remove('true');
+        element.style.pointerEvents = 'auto';
+    }
+    setQuestion(currentIndex);
+}
 
 function setQuestion(num){
     let currentQuestion = questions[num];
@@ -108,7 +136,8 @@ function setQuestion(num){
        const element = answerElement[index];
        if( currentQuestion.answers[index].correct){
            element.innerHTML = currentQuestion.answers[index].value
-            element.classList.add('correct')
+            element.classList.add('true')
+            correctElement = element;
        }
        else{
         element.innerHTML = currentQuestion.answers[index].value
@@ -118,27 +147,38 @@ function setQuestion(num){
 
 function nextQuestion(){
     currentIndex = currentIndex + 1;
-    console.log(currentIndex)
-    console.log(questions.length)
     if (currentIndex < questions.length) {
-        setQuestion(currentIndex); 
-        
+        setDefault()        
     } else {
-         console.log('end')
+        console.log('end')
+        questionsPage.style.display = 'none';
+        answerCounter.style.display = 'none'
+        resultsPage.style.display = 'block';
+        correctCount.innerText = correctAnswers;
+        correctPercentage.innerText = (correctAnswers / questions.length) * 100;
     }
 }
 
 function validateAnswer(){
-    for (let index = 0; index < answerElement.length; index++) {
-        const element = answerElement[index];
-        if( currentQuestion.answers[index].correct){
-            element.innerHTML = currentQuestion.answers[index].value
-             element.classList.add('correct')
-        }
-        else{
-         element.innerHTML = currentQuestion.answers[index].value
-        }
+    if (this.classList.contains('true')){
+        this.classList.add('correct')
+        correctAnswers ++;
+        counter.innerText = correctAnswers;
+        disableAnswers()
+    }
+    else{
+        this.classList.add('incorrect')
+        correctElement.classList.add('correct')
+        disableAnswers()
     }
 }
 
-setQuestion(currentIndex);
+function disableAnswers(){
+    for (let index = 0; index < answerElement.length; index++) {
+        const element = answerElement[index];
+        element.style.pointerEvents = 'none'
+    }
+}
+
+initializeGame()
+
