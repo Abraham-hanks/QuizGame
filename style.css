@@ -58,7 +58,6 @@ footer{
 
 .restart{
     margin-top: 10px;
-
 }
 
 
@@ -76,27 +75,9 @@ footer{
 #answer-counter div{
     padding: 5px;
     font-size: 1.5rem;
-    
 }
 
 #next-button, #restart-button{
     font-size: 20px;
     padding: 5px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

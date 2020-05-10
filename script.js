@@ -110,6 +110,7 @@ for (let index = 0; index < answerElement.length; index++) {
 }
 
 //Controllers
+//start the game
 function initializeGame(){
     currentIndex = 0;
     correctAnswers = 0;
@@ -118,6 +119,8 @@ function initializeGame(){
     resultsPage.style.display = 'none';
     setDefault(currentIndex)
 }
+
+//set default styling for elements for each round
 function setDefault(){
     for (let index = 0; index < answerElement.length; index++) {
         const element = answerElement[index];
@@ -128,6 +131,7 @@ function setDefault(){
     }
     setQuestion(currentIndex);
 }
+
 
 function setQuestion(num){
     let currentQuestion = questions[num];
@@ -150,7 +154,6 @@ function nextQuestion(){
     if (currentIndex < questions.length) {
         setDefault()        
     } else {
-        console.log('end')
         questionsPage.style.display = 'none';
         answerCounter.style.display = 'none'
         resultsPage.style.display = 'block';
